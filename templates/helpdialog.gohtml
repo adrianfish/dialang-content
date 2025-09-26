@@ -1,0 +1,38 @@
+<div id="help-dialog">
+    <div id="help-tabs">
+        <ul>
+            <li><a href="#help-legendtab">{{.key}}</a></li>
+            <li><a href="#help-abouttab">{{.aboutTitle}}</a></li>
+            <li><a href="#help-vspttab">{{.vsptTitle}}</a></li>
+            <li><a href="#help-satab">{{.saTitle}}</a></li>
+        </ul>
+        <div id="help-legendtab">
+            <h1>{{.key}}</h1>
+            <table id="legend-table" cols="2">
+                <tr><td><img src="/images/next.gif"/></td><td><td>{{.next}}</td></tr>
+                <tr><td><img src="/images/prev.gif"/></td><td><td>{{.back}}</td></tr>
+                <tr><td><img src="/images/skipf.gif"/></td><td><td>{{.skipf}}</td></tr>
+                <tr><td><img src="/images/skipb.gif"/></td><td><td>{{.skipb}}</td></tr>
+                <tr><td><img src="/images/help.gif"/></td><td><td>{{.help}}</td></tr>
+                <tr><td><img src="/images/littleyes.gif"/></td><td><td>{{.yes}}</td></tr>
+                <tr><td><img src="/images/littleno.gif"/></td><td><td>{{.no}}</td></tr>
+                <tr><td><img src="/images/smiley.gif"/></td><td><td>{{.smiley}}</td></tr>
+                <tr><td><img src="/images/keyb.gif"/></td><td><td>{{.keyboard}}</td></tr>
+                <tr><td><img src="/images/speaker.gif"/></td><td><td>{{.speaker}}</td></tr>
+            </table>
+        </div> <!-- /help-legendtab -->
+        <div id="help-abouttab">
+            <h1 id="abouthelp-title">{{.aboutTitle}}</h1>
+            <div id="abouthelp-crdialang">{{.crDialang | safeHTML}}</div>
+            <div id="abouthelp-crlancaster">{{.crLancaster | safeHTML}}</div>
+        </div> <!-- /help-abouttab -->
+        <div id="help-vspttab">
+            <h1 id="vspthelp-title">{{.vsptTitle | safeHTML}}</h1>
+            <div id="vspthelp-text">{{.vsptText | safeHTML}}</div>
+        </div> <!-- /help-vspttab -->
+        <div id="help-satab">
+            <h1 id="sahelp-title">{{.saTitle}}</h1>
+            <div id="sahelp-text">{{.saText | safeHTML}}</div>
+        </div> <!-- /help-satab -->
+    </div> <!-- /help-tabs -->
+</div> <!-- /help-dialog -->
