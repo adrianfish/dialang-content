@@ -1,0 +1,14 @@
+<div id="large-logo-wrapper">
+  <img src="/images/dlogo_large_dark.gif"/>
+</div>
+<form id="als-form" method="POST" action="/api/setal">
+  <select id="al-dropdown" name="al">
+    {{range .Languages}}
+    <option value="{{.Locale}}">{{.Description}}</option>
+    {{end}}
+  </select>
+</form>
+<br />
+<br />
+<div id="funder">{{.Fundermessage}}</div>
+<script src="/js/als.js"></script>

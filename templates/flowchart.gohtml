@@ -1,0 +1,28 @@
+                <h1 id="welcome-title">{{.welcomeTitle}}</h1>
+                <p id="welcome-text">{{.welcomeText}}</p>
+                <div id="procedure-title">{{.procedureTitle}}</div>
+                <p id="procedure-text">{{.procedureText}}</p>
+                <map name="flowchartmap">
+                    <area shape="rect" coords="20,0,68,41" href="#" onclick="dialang.launchFlowchartDialog('1');" title="{{.stage1Title}}" alt="{{.stage1}}">
+                    <area shape="rect" coords="83,0,131,41" href="#" onclick="dialang.launchFlowchartDialog('2');" title="{{.stage2Title}}" alt="{{.stage2}}">
+                    <area shape="rect" coords="148,0,196,41" href="#" onclick="dialang.launchFlowchartDialog('3');" title="{{.stage3Title}}" alt="{{.stage3}}">
+                    <area shape="rect" coords="213,0,262,41" href="#" onclick="dialang.launchFlowchartDialog('4');" title="{{.stage4Title}}" alt="{{.stage4}}">
+                    <area shape="rect" coords="281,0,329,41" href="#" onclick="dialang.launchFlowchartDialog('5');" title="{{.stage5Title}}" alt="{{.stage5}}">
+                </map>
+                <div><img src="/images/flowchart.gif" usemap="#flowchartmap"/></div> 
+                <div class="bottom-margin"></div>
+                <div id="dialog1" class="flowchart-dialog" title="{{.stage1Title}}">
+                    <div class="dialang-dialog-content">{{.stage1}}</div>
+                </div>
+                <div id="dialog2" class="flowchart-dialog" title="{{.stage2Title}}">
+                    <div class="dialang-dialog-content">{{.stage2}}</div>
+                </div>
+                <div id="dialog3" class="flowchart-dialog" title="{{.stage3Title}}">
+                    <div class="dialang-dialog-content">{{.stage3}}</div>
+                </div>
+                <div id="dialog4" class="flowchart-dialog" title="{{.stage4Title}}">
+                    <div class="dialang-dialog-content">{{.stage4}}</div>
+                </div>
+                <div id="dialog5" class="flowchart-dialog" title="{{.stage5Title}}">
+                    <div class="dialang-dialog-content">{{.stage5}}</div>
+                </div>

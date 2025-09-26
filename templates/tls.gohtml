@@ -1,0 +1,54 @@
+                <h1 id="tls-title">{{.tlsTitle}}</h1>
+                <table id="tls-table" cols="6">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><img src="/images/listening.gif" title="{{.listeningTooltip}}"/></th>
+                            <th><img src="/images/writing.gif" title="{{.writingTooltip}}"/></th>
+                            <th><img src="/images/reading.gif" title="{{.readingTooltip}}"/></th>
+                            <th><img src="/images/hammer.gif" title="{{.structuresTooltip}}"/></th>
+                            <th><img src="/images/book.gif" title="{{.vocabularyTooltip}}"/></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .testrows}}
+                        <tr>
+                            <td class="language-column">{{.languageName}}</td>
+                            <td class="language-skill-column"><a id="{{.languageCode}}-listening" href="javascript:;" class="tls-link" title="{{.languageName}}, {{$.listeningTooltip}}" tl="{{.languageCode}}" skill="listening" calibrated="{{.listeningcalibrated}}"><img src="/images/available.gif"/></a></td>
+                            <td class="language-skill-column"><a id="{{.languageCode}}-writing" href="javascript:;" class="tls-link" title="{{.languageName}}, {{$.writingTooltip}}" tl="{{.languageCode}}" skill="writing" calibrated="{{.writingcalibrated}}"><img src="/images/available.gif"/></a></td>
+                            <td class="language-skill-column"><a id="{{.languageCode}}-reading" href="javascript:;" class="tls-link" title="{{.languageName}}, {{$.readingTooltip}}" tl="{{.languageCode}}" skill="reading" calibrated="{{.readingcalibrated}}"><img src="/images/available.gif"/></a></td>
+                            <td class="language-skill-column"><a id="{{.languageCode}}-structures" href="javascript:;" class="tls-link" title="{{.languageName}}, {{$.structuresTooltip}}" tl="{{.languageCode}}" skill="structures" calibrated="{{.structurescalibrated}}"><img src="/images/available.gif"/></a></td>
+                            <td class="language-skill-column"><a id="{{.languageCode}}-vocabulary" href="javascript:;" class="tls-link" title="{{.languageName}}, {{$.vocabularyTooltip}}" tl="{{.languageCode}}" skill="vocabulary" calibrated="{{.vocabularycalibrated}}"><img src="/images/available.gif"/></a></td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+
+                <div id="tls-legend">
+                    <img src="/images/done.gif"/>{{.done}}
+                    <img src="/images/available.gif"/>{{.available}}
+                    <img src="/images/notavailable.gif"/>{{.notavailable}}
+                </div>
+
+                <div id="disclaimer-dialog" title="{{.disclaimerTitle}}">
+                    <div class="dialang-dialog-content">
+                        <div id="disclaimer-text">{{.disclaimer}}</div>
+                        <div class="dialog-button-panel"><button id="disclaimer-button"><img src="/images/yes.gif"/></button><br />{{.ok}}</div>
+                    </div>
+                </div> <!-- /disclaimer-dialog -->
+
+                <div id="confirm-dialog" title="{{.confirmationTitle}}" class="dialang-dialog">
+                    <div class="dialang-dialog-content">
+                        <p>{{.testChosen}}</p>
+                        <p id="confirmation_langskill"></p>
+                        <div id="confirmation-button-table">
+                            <div>
+                                <div align="center"><button id="confirm-yes"><img src="/images/yes.gif"/></button></div>
+                                <div align="center"><button id="confirm-no"><img src="/images/no.gif" width="58" height="58"/></button></div>
+                            </div>
+                            <div>
+                                <div align="center">{{.yes}}</div><div align="center">{{.no}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- /confirmation-dialog -->

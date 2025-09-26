@@ -1,0 +1,10 @@
+admin-texts
+db
+exporters
+go*
+main.go
+models
+special_chars.properties
+templates
+.aider*
+.git*

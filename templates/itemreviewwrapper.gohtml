@@ -1,0 +1,16 @@
+{{/*
+    This is built by DialangExporter.scala and is used by itemreview.js when the item table
+    is rendered. It basically gives us the subskill descriptions in the leftmost column.
+*/}}
+<script type="text/javascript">
+    var subskillLookup = {
+        {{range .subskills}}
+        '{{.code}}':'{{.description}}',
+        {{end}}
+    };
+</script>
+<h1>{{.title}}</h1>
+<p>{{.text}}</p>
+<div id="item-table">
+</div> <!-- /item-table -->
+<div class="bottom-margin"></div>

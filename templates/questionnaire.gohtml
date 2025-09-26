@@ -1,0 +1,116 @@
+<form id="questionnaire-form" action="/submitquestionnaire" method="POST" enctype="application/x-www-form-urlencoded">
+    <h1 id="questionnaire-title">{{.title}}</h1>
+    <div id="questionnaire-information">{{.information}}</div>
+    <div id="questionnaire-table" class="dialang-table">
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.age}}</div>
+            <div class="questionnaire-table-cell">
+                <select name="agegroup" class="questionnaire-dropdown">
+                    <option value="-1">{{.prefernottosay}}</option>
+                    <option value="1">&lt; 20</option>
+                    <option value="2">20 &gt; 30</option>
+                    <option value="3">31 &gt; 40</option>
+                    <option value="4">41 &gt; 50</option>
+                    <option value="5">51 &gt; 60</option>
+                    <option value="6">61 &gt; 70</option>
+                    <option value="7">71 &gt; 80</option>
+                    <option value="8">81 &gt; 90</option>
+                    <option value="9">&gt; 90</option>
+                </select>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.gender}}</div>
+            <div class="questionnaire-table-cell">
+                <label>
+                    <input type="radio" class="questionnaire-gender-button" name="gender" value="-1" checked="checked" />
+                    {{.prefernottosay}}
+                </label>
+                <br />
+                <label>
+                    <input type="radio" class="questionnaire-gender-button" name="gender" value="male" />
+                    {{.gendermale}}
+                </label>
+                <br />
+                <label>
+                    <input type="radio" class="questionnaire-gender-button" name="gender" value="female" />
+                    {{.genderfemale}}
+                </label>
+                <br />
+                <label>
+                    <input id="questionnaire-othergender-button" type="radio" name="gender" value="other" />
+                    {{.other}}
+                </label>
+                <input id="questionnaire-othergender-field" type="text" name="othergender" style="display: none;" class="questionnaire-textinput"/>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.firstlanguage}}</div>
+            <div class="questionnaire-table-cell">
+                <select name="firstlanguage" class="questionnaire-dropdown">
+                    <option value="-1">{{.prefernottosay}}</option>
+                    {{range .languages}}
+                    <option value="{{.isocode}}">{{.name}}</option>
+                    {{end}}
+                    <option value="other">{{.other}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.nationality}}</div>
+            <div class="questionnaire-table-cell">
+                <select name="nationality" class="questionnaire-dropdown">
+                    <option value="-1">{{.prefernottosay}}</option>
+                    {{range .countries}}
+                    <option value="{{.isocode}}">{{.name}}</option>
+                    {{end}}
+                </select>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.institution}}</div>
+            <div class="questionnaire-table-cell">
+                <input type="text" name="institution" class="questionnaire-textinput"/ >
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.reason}}</div>
+            <div class="questionnaire-table-cell">
+                <select name="reason" class="questionnaire-dropdown">
+                    <option value="-1">{{.prefernottosay}}</option>
+                    <option value="1">{{.reasonplacement}}</option>
+                    <option value="2">{{.reasonimprovement}}</option>
+                    <option value="3">{{.reasonresearchproject}}</option>
+                    <option value="4">{{.reasondialangresearch}}</option>
+                    <option value="5">{{.reasonemployer}}</option>
+                    <option value="6">{{.reasonother}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.accuracy}}</div>
+            <div class="questionnaire-table-cell">
+                <select name="accuracy" class="questionnaire-dropdown">
+                    <option value="-1">{{.prefernottosay}}</option>
+                    <option value="1">{{.accuracyterrible}}</option>
+                    <option value="2">{{.accuracybad}}</option>
+                    <option value="3">{{.accuracyokay}}</option>
+                    <option value="4">{{.accuracygood}}</option>
+                    <option value="5">{{.accuracyexcellent}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.comments}}</div>
+            <div class="questionnaire-table-cell">
+                <textarea name="comments" class="questionnaire-textinput"></textarea>
+            </div>
+        </div>
+        <div class="questionnaire-table-row">
+            <div class="questionnaire-table-cell">{{.email}}</div>
+            <div class="questionnaire-table-cell">
+                <input type="text" name="email" class="questionnaire-textinput"></input>
+            </div>
+        </div>
+    </div>
+</form>

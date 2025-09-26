@@ -1,0 +1,85 @@
+          <script>
+
+            var answered = {
+              {{range .words}}
+              '{{.id}}':false,
+              {{end}}
+            };
+
+          </script>
+          <h1>{{.title | html}}</h1>
+          <img src="/images/true.gif"/> = {{.yes}} <img src="/images/false.gif"/> = {{.no}}
+          <form id="vsptform" action="/scorevspt" method="POST">
+            <input type="hidden" name="al" value="{{.al}}"/>
+            <input type="hidden" name="tl" value="{{.tl}}"/>
+            <input type="hidden" id="cheatlevel" name="cheatlevel" value="zero"/>
+            <!--input type="hidden" name="skill" value="{{.skill}}"/-->
+            <div id="vspt-table">
+              {{range .tab}}
+              <div>
+                <div>
+                  <label for="{{.id1}}_correct">
+                    <input class="valid-button word {{.validClass1}}" id="{{.id1}}_correct" type="radio" name="word:{{.id1}}" value="valid"/>
+                    <img id="{{.id1}}_correct_image" src="/images/true.gif" />
+                  </label>
+                  <label for="{{.id1}}_incorrect">
+                    <input class="invalid-button word {{.invalidClass1}}" id="{{.id1}}_incorrect" type="radio" name="word:{{.id1}}" value="invalid"/>
+                    <img id="{{.id1}}_incorrect_image" src="/images/false.gif" />
+                  </label>
+                  {{.word1}}
+                </div>
+                <div>
+                  <label for="{{.id2}}_correct">
+                    <input class="valid-button word {{.validClass2}}" id="{{.id2}}_correct" type="radio" name="word:{{.id2}}" value="valid"/>
+                    <img id="{{.id2}}_correct_image" src="/images/true.gif" />
+                  </label>
+                  <label for="{{.id2}}_incorrect">
+                    <input class="invalid-button word {{.invalidClass2}}" id="{{.id2}}_incorrect" type="radio" name="word:{{.id2}}" value="invalid"/>
+                    <img id="{{.id2}}_incorrect_image" src="/images/false.gif" />
+                  </label>
+                  {{.word2}}
+                </div>
+                <div>
+                  <label for="{{.id3}}_correct">
+                    <input class="valid-button word {{.validClass3}}" id="{{.id3}}_correct" type="radio" name="word:{{.id3}}" value="valid"/>
+                    <img id="{{.id3}}_correct_image" src="/images/true.gif" />
+                  </label>
+                  <label for="{{.id3}}_incorrect">
+                    <input class="invalid-button word {{.invalidClass3}}" id="{{.id3}}_incorrect" type="radio" name="word:{{.id3}}" value="invalid"/>
+                    <img id="{{.id3}}_incorrect_image" src="/images/false.gif" />
+                  </label>
+                  {{.word3}}
+                </div>
+              </div>
+              {{end}}
+            </div>
+            <input id="vspt-send-button" type="button" value="{{.submit}}" disabled/>
+          </form>
+          <div id="confirm-send-dialog" class="dialang-dialog" title="{{.confirmationTitle}}">
+            <div class="dialang-dialog-content">
+              <p>{{.confirmsendquestion}}</p>
+              <div id="confirmation-button-table">
+                <div>
+                  <div><button id="confirm-send-yes"><img src="/images/yes.gif"/></button></div>
+                  <div><button id="confirm-send-no"><img src="/images/no.gif" width="58" height="58"/></button></div>
+                </div>
+                <div>
+                  <div>{{.yes}}</div><div>{{.no}}</div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- /confirm-send-dialog -->
+          <div id="confirm-skip-dialog" class="dialang-dialog" title="{{.confirmationTitle}}">
+            <div class="dialang-dialog-content">
+              <p>{{.warningText | html}}</p>
+              <div id="confirmation-button-table">
+                <div>
+                  <div><button id="confirm-skip-yes"><img src="/images/yes.gif"/></button></div>
+                  <div><button id="confirm-skip-no"><img src="/images/no.gif" width="58" height="58"/></button></div>
+                </div>
+                <div>
+                  <div>{{.yes}}</div><div>{{.no}}</div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- /confirm-skip-dialog -->
