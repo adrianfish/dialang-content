@@ -2,15 +2,18 @@ package exporters
 
 import (
 	"encoding/csv"
+	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"path"
 	"strconv"
 	"strings"
 	"github.com/dialangproject/common/db"
+	"github.com/dialangproject/common/models"
 )
 
-func ExportVSPTData(baseDir string) error {
+func exportVSPTData(baseDir string) error {
 
 	wordsFile, err := os.OpenFile(baseDir + "/vspt-words.csv", os.O_RDWR | os.O_CREATE, 0666)
 	if err != nil {
@@ -51,7 +54,7 @@ func ExportVSPTData(baseDir string) error {
 	return nil
 }
 
-func ExportSAData(baseDir string) error {
+func exportSAData(baseDir string) error {
 
 	weightsFile, err := os.Create(path.Join(baseDir, "sa-weights.csv"))
 	if err != nil {
@@ -88,7 +91,7 @@ func ExportSAData(baseDir string) error {
 	return nil
 }
 
-func ExportPreestData(baseDir string) error {
+func exportPreestData(baseDir string) error {
 
 	weightsFile, err := os.Create(path.Join(baseDir, "preest-weights.csv"))
 	if err != nil {
@@ -134,7 +137,7 @@ func ExportPreestData(baseDir string) error {
 	return nil
 }
 
-func ExportBookletData(baseDir string) error {
+func exportBookletData(baseDir string) error {
 
 	lengthsFile, err := os.Create(path.Join(baseDir, "booklet-lengths.csv"))
 	if err != nil {
@@ -182,4 +185,104 @@ func ExportBookletData(baseDir string) error {
 	basketsWriter.Flush()
 
 	return nil
+}
+
+func exportItemAnswers(baseDir string) {
+
+	itemAnswers:= map[int][]models.Answer{}
+	for _, answer := range db.GetAnswers() {
+		if answers, ok := itemAnswers[answer.ItemId]; ok {
+			itemAnswers[answer.ItemId] = append(answers, answer)
+		} else {
+			itemAnswers[answer.ItemId] = []models.Answer{}
+		}
+	}
+
+	if f, err := os.Create(path.Join(baseDir, "item-answers.json")); err != nil {
+		log.Fatalf("Failed to create item-answers.json: %s\n", err)
+	} else {
+		defer f.Close()
+		json.NewEncoder(f).Encode(itemAnswers)
+	}
+}
+
+func exportAnswers(baseDir string) {
+
+	answers:= map[int]models.Answer{}
+	for _, answer := range db.GetAnswers() {
+		answers[answer.Id] = answer
+	}
+
+	if f, err := os.Create(path.Join(baseDir, "answers.json")); err != nil {
+		log.Fatalf("Failed to create answers.json: %s\n", err)
+	} else {
+		defer f.Close()
+		json.NewEncoder(f).Encode(answers)
+	}
+}
+
+func exportItems(baseDir string) {
+
+	items:= map[int]models.Item{}
+	if dbItems, err := db.GetItems(); err == nil {
+		for _, item := range dbItems {
+			items[item.Id] = item
+		}
+	} else {
+		log.Fatal(err)
+	}
+
+	if f, err := os.Create(path.Join(baseDir, "items.json")); err != nil {
+		log.Fatalf("Failed to create items.json: %s\n", err)
+	} else {
+		defer f.Close()
+		json.NewEncoder(f).Encode(items)
+	}
+}
+
+func exportItemGrades(baseDir string) {
+
+	gradesMap := map[string]map[int]models.ItemGrade{}
+	if grades, err := db.GetItemGrades(); err == nil {
+		for _, grade := range grades {
+			key := fmt.Sprintf("%v#%v#%v", grade.Tl, grade.Skill, grade.BookletId)
+			if _, ok := gradesMap[key]; !ok {
+				gradesMap[key] = map[int]models.ItemGrade{}
+			}
+			gradesMap[key][grade.RawScore] = grade
+		}
+	} else {
+		log.Fatal(err)
+	}
+
+	if f, err := os.Create(path.Join(baseDir, "item-grades.json")); err != nil {
+		log.Fatalf("Failed to create items.json: %s\n", err)
+	} else {
+		defer f.Close()
+		json.NewEncoder(f).Encode(gradesMap)
+	}
+}
+
+func exportPunctuation(baseDir string) {
+
+	chars := db.GetPunctuationCharacters()
+	if f, err := os.Create(path.Join(baseDir, "punctuation.json")); err != nil {
+		log.Fatalf("Failed to create punctuation.json: %s\n", err)
+	} else {
+		defer f.Close()
+		json.NewEncoder(f).Encode(chars)
+	}
+}
+
+func ExportWebData(baseDir string) {
+
+	exportVSPTData(baseDir)
+	exportSAData(baseDir)
+	exportPreestData(baseDir)
+	exportBookletData(baseDir)
+	exportItemAnswers(baseDir)
+	exportAnswers(baseDir)
+	exportItems(baseDir)
+	exportPunctuation(baseDir)
+	exportItemGrades(baseDir)
 }
