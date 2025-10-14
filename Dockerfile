@@ -1,3 +1,2 @@
-FROM nginx
-RUN apt-get update && apt-get install -y vim silversearcher-ag
+FROM nginx:stable-alpine3.21
 COPY static-site /usr/share/nginx/html

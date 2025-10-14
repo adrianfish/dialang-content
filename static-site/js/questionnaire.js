@@ -13,7 +13,7 @@ if (!dialang.flags.hideTLS) {
     $('#next').click(function () {
 
         // Submit the form
-        $.post('submitquestionnaire', $('#questionnaire-form').serialize(), function () {
+        $.post('/api/submitquestionnaire', $('#questionnaire-form').serialize(), function () {
 
             dialang.questionnaireShown = true;
             if (!dialang.flags.hideTLS) {
