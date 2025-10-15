@@ -1,3 +1,6 @@
+dialang.session.reviewMode = false;
+dialang.session.instantFeedbackOn = false;
+
 $('#skipback').prop('disabled', true);
 $('#skipforward').prop('disabled', false).click(function (e) {
 

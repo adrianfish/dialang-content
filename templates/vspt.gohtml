@@ -7,7 +7,7 @@
             };
 
           </script>
-          <h1>{{.title | html}}</h1>
+          <h1>{{.title}}</h1>
           <img src="/images/true.gif"/> = {{.yes}} <img src="/images/false.gif"/> = {{.no}}
           <form id="vsptform" action="/scorevspt" method="POST">
             <input type="hidden" name="al" value="{{.al}}"/>
@@ -71,7 +71,7 @@
           </div> <!-- /confirm-send-dialog -->
           <div id="confirm-skip-dialog" class="dialang-dialog" title="{{.confirmationTitle}}">
             <div class="dialang-dialog-content">
-              <p>{{.warningText | html}}</p>
+              <p>{{.warningText}}</p>
               <div id="confirmation-button-table">
                 <div>
                   <div><button id="confirm-skip-yes"><img src="/images/yes.gif"/></button></div>

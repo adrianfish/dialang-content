@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"os"
 	"path"
-	"github.com/dialangproject/common/db"
+	"github.com/dialangproject/content/db"
 	"github.com/dialangproject/common/models"
 )
 

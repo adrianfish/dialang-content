@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 	"path"
-	"github.com/dialangproject/common/db"
+	"github.com/dialangproject/content/db"
 )
 
 func ExportTLSPages(baseDir string) {

@@ -9,7 +9,7 @@ import (
 	"os"
 	"path"
 	"strconv"
-	"github.com/dialangproject/common/db"
+	"github.com/dialangproject/content/db"
 )
 
 func ExportTestIntroPages(baseDir string) {

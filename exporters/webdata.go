@@ -9,7 +9,7 @@ import (
 	"path"
 	"strconv"
 	"strings"
-	"github.com/dialangproject/common/db"
+	"github.com/dialangproject/content/db"
 	"github.com/dialangproject/common/models"
 )
 
@@ -124,12 +124,14 @@ func exportPreestData(baseDir string) error {
 		return err
 	}
 
-	for key, assignment := range db.GetPreestAssignments() {
-		assignmentsWriter.Write([]string{
-			key,
-			strconv.FormatFloat(assignment.Pe, 'g', -1, 64),
-			strconv.Itoa(assignment.BookletId),
-		})
+	for key, assignments := range db.GetPreestAssignments() {
+		for _, assignment := range assignments {
+			assignmentsWriter.Write([]string{
+				key,
+				strconv.FormatFloat(assignment.Pe, 'g', -1, 64),
+				strconv.Itoa(assignment.BookletId),
+			})
+		}
 	}
 
 	assignmentsWriter.Flush()

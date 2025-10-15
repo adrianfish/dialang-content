@@ -20,26 +20,21 @@ func main()  {
 
 	var wg sync.WaitGroup
 
-	/*
 	wg.Go(func() {
 		exporters.ExportBasketPages(contentDir)
 	})
-	*/
 
 	wg.Go(func() {
-		//exporters.ExportKeyboardFragments(contentDir)
+		exporters.ExportKeyboardFragments(contentDir)
 		exporters.ExportWebData(webDataDir)
-		/*
 		exporters.ExportALS(contentDir)
 		exporters.ExportHelpDialogs(contentDir)
 		exporters.ExportLegendPages(contentDir)
 		exporters.ExportFlowchartPages(contentDir)
 		exporters.ExportTLSPages(contentDir)
 		exporters.ExportVSPTIntroPages(contentDir)
-		*/
 	})
 
-	/*
 	wg.Go(func() {
 		exporters.ExportVSPTPages(contentDir)
 		exporters.ExportVSPTFeedbackPages(contentDir)
@@ -56,7 +51,6 @@ func main()  {
 	})
 
 	exporters.ExportQuestionnairePages(contentDir)
-	*/
 
 	wg.Wait()
 

@@ -5,7 +5,7 @@ import (
 	"path"
 	"log"
 	"html/template"
-	"github.com/dialangproject/common/db"
+	"github.com/dialangproject/content/db"
 	"github.com/dialangproject/common/models"
 )
 
