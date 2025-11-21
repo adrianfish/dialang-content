@@ -10,7 +10,7 @@ import (
 
 func main()  {
 
-	contentDir := "./static-site/content"
+	contentDir := "./generated-content"
 	os.MkdirAll(contentDir, 0777)
 
 	webDataDir := "../web/data-files"
