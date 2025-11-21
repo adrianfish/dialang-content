@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 	"path"
-	"github.com/dialangproject/content/db"
+	"github.com/adrianfish/dialang-content/db"
 	"github.com/pariz/gountries"
 	"golang.org/x/text/language"
 	"golang.org/x/text/language/display"

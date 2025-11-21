@@ -9,8 +9,8 @@ import (
 	"path"
 	"strconv"
 	"strings"
-	"github.com/dialangproject/content/db"
-	"github.com/dialangproject/common/models"
+	"github.com/adrianfish/dialang-content/db"
+	"github.com/adrianfish/dialang-common/models"
 )
 
 func exportVSPTData(baseDir string) error {

@@ -6,7 +6,7 @@ import (
 	"path"
 	"strings"
 	"html/template"
-	"github.com/dialangproject/content/db"
+	"github.com/adrianfish/dialang-content/db"
 )
 
 func ExportSAIntroPages(baseDir string) {

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"database/sql"
 	"html/template"
-	"github.com/dialangproject/common/models"
+	"github.com/adrianfish/dialang-common/models"
 	_ "github.com/lib/pq"
 	"github.com/magiconair/properties"
 )

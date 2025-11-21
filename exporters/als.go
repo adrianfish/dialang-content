@@ -6,8 +6,8 @@ import (
 	"bytes"
 	"os"
 	"path"
-	"github.com/dialangproject/content/db"
-	"github.com/dialangproject/common/models"
+	"github.com/adrianfish/dialang-content/db"
+	"github.com/adrianfish/dialang-common/models"
 )
 
 func ExportALS(baseDir string) {

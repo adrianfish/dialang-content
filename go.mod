@@ -1,11 +1,11 @@
-module github.com/dialangproject/content
+module github.com/adrianfish/dialang-content
 
 go 1.25.0
 
-replace github.com/dialangproject/common => ../common
+replace github.com/adrianfish/dialang-common => ../common
 
 require (
-	github.com/dialangproject/common v0.0.0-00010101000000-000000000000
+	github.com/adrianfish/dialang-common v0.0.0-00010101000000-000000000000
 	github.com/magiconair/properties v1.8.10
 	github.com/pariz/gountries v0.1.6
 	golang.org/x/text v0.29.0

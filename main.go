@@ -5,7 +5,7 @@ import (
 	"log"
 	"sync"
 	"time"
-	"github.com/dialangproject/content/exporters"
+	"github.com/adrianfish/dialang-content/exporters"
 )
 
 func main()  {

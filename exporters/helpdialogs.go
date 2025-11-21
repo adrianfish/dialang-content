@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 	"path"
-	"github.com/dialangproject/content/db"
+	"github.com/adrianfish/dialang-content/db"
 )
 
 func ExportHelpDialogs(baseDir string) {

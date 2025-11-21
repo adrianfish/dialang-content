@@ -7,7 +7,7 @@ import (
 	"io"
 	"path"
 	"strings"
-	"github.com/dialangproject/content/db"
+	"github.com/adrianfish/dialang-content/db"
 )
 
 func ExportFeedbackMenuPages(baseDir string) {
