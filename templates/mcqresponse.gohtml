@@ -1,0 +1,8 @@
+<input type="hidden" name="itemId" value="{{.itemId}}" />
+<div id="prompt">{{.itemText}}</div>
+<div id="radios">
+    {{range .answers}}
+    <input type="radio" id="{{.Id}}" name="response" value="{{.Id}}" />
+    <label for="{{.Id}}">{{.Text}}</label><br />
+    {{end}}
+</div> <!-- /radios -->

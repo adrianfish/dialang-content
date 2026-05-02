@@ -1,0 +1,28 @@
+<div id="tabbedpane-tabs">
+    <ul>
+        {{range .childBaskets}}
+        <li id="{{.basketId}}-tab"><a href="#tabs-{{.itemId}}"></a></li>
+        {{end}}
+    </ul>
+    {{range .childBaskets}}
+    <div id="tabs-{{.itemId}}">
+        <div id="prompt">{{.itemText}}</div>
+        <div id="radios">
+            {{range .answers}}
+            <input type="radio" id="{{.Id}}" basketid="{{$.basketId}}" name="{{.ItemId}}-response" value="{{.Id}}" />
+            <label for="{{.Id}}">{{.Text}}</label><br />
+            {{end}}
+        </div>
+    </div>
+    {{end}}
+</div> <!-- /tabbedpane-tabs -->
+{{range .childBaskets}}
+<input type="hidden" name="{{.itemId}}-position" value="{{.positionInBasket}}"/><br />
+{{end}}
+<script>
+    var itemIds = [
+        {{range .childBaskets}}
+        {{.itemId}},
+        {{end}}
+    ];
+</script>

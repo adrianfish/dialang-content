@@ -1,0 +1,8 @@
+<div id="prompt">{{.basket_prompt}}</div>
+<div id="radios">
+    <span>{{.markup}}</span>
+</div> <!-- /radios -->
+
+{{range .items}}
+<input type="hidden" name="{{.Id}}-position" value="{{.Position}}" />
+{{end}}
