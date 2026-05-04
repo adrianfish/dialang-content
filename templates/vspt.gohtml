@@ -8,52 +8,67 @@
 
           </script>
           <h1>{{.title}}</h1>
-          <img src="/images/true.gif"/> = {{.yes}} <img src="/images/false.gif"/> = {{.no}}
+          <div id="vspt-legend">
+            <div><img src="/images/true.gif" /></div>
+            <div>{{.yes}}</div>
+            <div><img src="/images/false.gif" /></div>
+            <div>{{.no}}</div>
+          </div>
           <form id="vsptform" action="/scorevspt" method="POST">
             <input type="hidden" name="al" value="{{.al}}"/>
             <input type="hidden" name="tl" value="{{.tl}}"/>
             <input type="hidden" id="cheatlevel" name="cheatlevel" value="zero"/>
             <!--input type="hidden" name="skill" value="{{.skill}}"/-->
-            <div id="vspt-table">
+            <div id="vspt-grid">
               {{range .tab}}
-              <div>
-                <div class="word-container">
-                  <label for="{{.id1}}_correct">
-                    <input class="valid-button word {{.validClass1}}" id="{{.id1}}_correct" type="radio" name="word:{{.id1}}" value="valid"/>
-                    <img id="{{.id1}}_correct_image" src="/images/true.gif" />
-                  </label>
-                  <label for="{{.id1}}_incorrect">
-                    <input class="invalid-button word {{.invalidClass1}}" id="{{.id1}}_incorrect" type="radio" name="word:{{.id1}}" value="invalid"/>
-                    <img id="{{.id1}}_incorrect_image" src="/images/false.gif" />
-                  </label>
-                  {{.word1}}
+                <div class="vspt-button-block">
+                  <div>
+                    <label for="{{.id1}}_correct">
+                      <input class="valid-button word {{.validClass1}}" id="{{.id1}}_correct" type="radio" name="word:{{.id1}}" value="valid"/>
+                      <img id="{{.id1}}_correct_image" src="/images/true.gif" />
+                    </label>
+                  </div>
+                  <div>
+                    <label for="{{.id1}}_incorrect">
+                      <input class="invalid-button word {{.invalidClass1}}" id="{{.id1}}_incorrect" type="radio" name="word:{{.id1}}" value="invalid"/>
+                      <img id="{{.id1}}_incorrect_image" src="/images/false.gif" />
+                    </label>
+                  </div>
+                  <div>{{.word1}}</div>
                 </div>
-                <div>
-                  <label for="{{.id2}}_correct">
-                    <input class="valid-button word {{.validClass2}}" id="{{.id2}}_correct" type="radio" name="word:{{.id2}}" value="valid"/>
-                    <img id="{{.id2}}_correct_image" src="/images/true.gif" />
-                  </label>
-                  <label for="{{.id2}}_incorrect">
-                    <input class="invalid-button word {{.invalidClass2}}" id="{{.id2}}_incorrect" type="radio" name="word:{{.id2}}" value="invalid"/>
-                    <img id="{{.id2}}_incorrect_image" src="/images/false.gif" />
-                  </label>
-                  {{.word2}}
+                <div class="vspt-button-block">
+                  <div>
+                    <label for="{{.id2}}_correct">
+                      <input class="valid-button word {{.validClass2}}" id="{{.id2}}_correct" type="radio" name="word:{{.id2}}" value="valid"/>
+                      <img id="{{.id2}}_correct_image" src="/images/true.gif" />
+                    </label>
+                  </div>
+                  <div>
+                    <label for="{{.id2}}_incorrect">
+                      <input class="invalid-button word {{.invalidClass2}}" id="{{.id2}}_incorrect" type="radio" name="word:{{.id2}}" value="invalid"/>
+                      <img id="{{.id2}}_incorrect_image" src="/images/false.gif" />
+                    </label>
+                  </div>
+                  <div>{{.word2}}</div>
                 </div>
-                <div>
-                  <label for="{{.id3}}_correct">
-                    <input class="valid-button word {{.validClass3}}" id="{{.id3}}_correct" type="radio" name="word:{{.id3}}" value="valid"/>
-                    <img id="{{.id3}}_correct_image" src="/images/true.gif" />
-                  </label>
-                  <label for="{{.id3}}_incorrect">
-                    <input class="invalid-button word {{.invalidClass3}}" id="{{.id3}}_incorrect" type="radio" name="word:{{.id3}}" value="invalid"/>
-                    <img id="{{.id3}}_incorrect_image" src="/images/false.gif" />
-                  </label>
-                  {{.word3}}
+                <div class="vspt-button-block">
+                  <div>
+                    <label for="{{.id3}}_correct">
+                      <input class="valid-button word {{.validClass3}}" id="{{.id3}}_correct" type="radio" name="word:{{.id3}}" value="valid"/>
+                      <img id="{{.id3}}_correct_image" src="/images/true.gif" />
+                    </label>
+                  </div>
+                  <div>
+                    <label for="{{.id3}}_incorrect">
+                      <input class="invalid-button word {{.invalidClass3}}" id="{{.id3}}_incorrect" type="radio" name="word:{{.id3}}" value="invalid"/>
+                      <img id="{{.id3}}_incorrect_image" src="/images/false.gif" />
+                    </label>
+                  </div>
+                  <div>{{.word3}}</div>
                 </div>
-              </div>
               {{end}}
             </div>
-            <input id="vspt-send-button" type="button" value="{{.submit}}" disabled/>
+            <input id="vspt-send-button" type="button" value="{{.submit}}" disabled />
           </form>
           <div id="confirm-send-dialog" class="dialang-dialog" title="{{.confirmationTitle}}">
             <div class="dialang-dialog-content">
