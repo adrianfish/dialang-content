@@ -28,6 +28,7 @@ func main()  {
 		exporters.ExportWebData(webDataDir)
 		exporters.ExportLangMappings(contentDir)
 		exporters.ExportALS(contentDir)
+		exporters.ExportLaunch(contentDir)
 		exporters.ExportHelpDialogs(contentDir)
 		exporters.ExportLegendPages(contentDir)
 		exporters.ExportFlowchartPages(contentDir)

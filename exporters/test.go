@@ -173,7 +173,7 @@ func ExportBasketPages(baseDir string) {
 
 				for i, itemNumber := range matches {
 					item := items[i]
-				  	gapMarkup = strings.Replace(gapMarkup, itemNumber,"<input type=\"text\" name=\"" + strconv.Itoa(item.Id) + "-response\" />", 1)
+					gapMarkup = strings.Replace(gapMarkup, itemNumber,"<input type=\"text\" name=\"" + strconv.Itoa(item.Id) + "-response\" autocomplete=\"off\" />", 1)
 				}
 
 				data := map[string]any{"basketPrompt": basketPrompt, "items": items, "markup": template.HTML(gapMarkup)}

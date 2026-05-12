@@ -2,7 +2,7 @@
 <div id="radios">
     {{range .items}}
     <span>{{.Text}}</span>
-    <input type="text" name="{{.Id}}-response" /><br />
+    <input type="text" name="{{.Id}}-response" autocomplete="off" /><br />
     <input type="hidden" name="{{.Id}}-position" value="{{.Position}}"/><br />
     {{end}}
 </div> <!-- /radios -->
