@@ -16,6 +16,10 @@ func main()  {
 	webDataDir := "../dialang-web/data-files"
 	os.MkdirAll(webDataDir, 0777)
 
+	if err := os.CopyFS(webDataDir + "/language-names", os.DirFS("data-files/language-names")); err != nil {
+		log.Println("Failed to copy language names");
+	}
+
 	start := time.Now()
 
 	var wg sync.WaitGroup
