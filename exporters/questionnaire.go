@@ -36,21 +36,21 @@ func init() {
 	}
 
 	dicts = map[string]*display.Dictionary{
-		"deu_de": display.German,
-		"ell_gr": display.Greek,
-		"eng_gb": display.English,
-		"spa_es": display.Spanish,
-		"fin_fi": display.Finnish,
-		"fra_fr": display.French,
-		"isl_is": display.Icelandic,
-		"ita_it": display.Italian,
-		"nld_nl": display.Dutch,
-		"nor_no": display.Norwegian,
-		"por_pt": display.Portuguese,
-		"swe_se": display.Swedish,
-		"dan_dk": display.Danish,
-		"cmn_cn": display.Chinese,
-		"ind_id": display.Indonesian,
+		"de-DE": display.German,
+		"el-GR": display.Greek,
+		"en-GB": display.English,
+		"es-ES": display.Spanish,
+		"fi-FI": display.Finnish,
+		"fr-FR": display.French,
+		"is-IS": display.Icelandic,
+		"it-IT": display.Italian,
+		"nl-NL": display.Dutch,
+		"no-NO": display.Norwegian,
+		"pt-PT": display.Portuguese,
+		"sv-SE": display.Swedish,
+		"da-DK": display.Danish,
+		"zh-CN": display.Chinese,
+		"id-ID": display.Indonesian,
 	}
 }
 

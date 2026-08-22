@@ -517,17 +517,17 @@ func GetTranslation(key string, lang string) string {
 		if v, ok := props.Get(key); ok {
 			return v
 		}
-		fmt.Sprintf("No translation for lang %v and key %v. Will fall back to eng_gb ...\n", lang, key)
+		fmt.Sprintf("No translation for lang %v and key %v. Will fall back to en-GB ...\n", lang, key)
 	} else {
-		fmt.Sprintf("No translation for lang %v and key %v. Will fall back to eng_gb ...\n", lang, key)
+		fmt.Sprintf("No translation for lang %v and key %v. Will fall back to en-GB ...\n", lang, key)
 	}
 
-	if props, ok := adminTexts["eng_gb"]; ok {
+	if props, ok := adminTexts["en-GB"]; ok {
 		if v, ok := props.Get(key); ok {
 			return v
 		}
 	}
-	fmt.Sprintf("No translation for eng_gb and key %v. Will return %v ...\n", lang, key, key)
+	fmt.Sprintf("No translation for en-GB and key %v. Will return %v ...\n", lang, key, key)
 	return key
 }
 

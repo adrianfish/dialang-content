@@ -33,6 +33,7 @@ func main()  {
 		exporters.ExportLegendPages(contentDir)
 		exporters.ExportFlowchartPages(contentDir)
 		exporters.ExportTLSPages(contentDir)
+		exporters.ExportDeepLinkingMenuPages(contentDir)
 		exporters.ExportVSPTIntroPages(contentDir)
 	})
 
