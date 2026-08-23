@@ -1,6 +1,8 @@
 package main
 
 import (
+	"path/filepath"
+	"io"
 	"os"
 	"log"
 	"sync"
@@ -16,7 +18,14 @@ func main()  {
 	webDataDir := "../dialang-web/data-files"
 	os.MkdirAll(webDataDir, 0777)
 
-	if err := os.CopyFS(webDataDir + "/language-names", os.DirFS("data-files/language-names")); err != nil {
+	namesFile, err := os.Create(filepath.Join(webDataDir, "language-names.json"));
+	if err != nil {
+	}
+
+	srcNamesFile, err := os.Open("./data-files/language-names.json")
+	_, erre := io.Copy(namesFile, srcNamesFile)
+
+	if erre != nil {
 		log.Println("Failed to copy language names");
 	}
 
