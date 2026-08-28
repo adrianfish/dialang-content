@@ -8,7 +8,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportTLSPages(baseDir string) {
+func ExportTLSPages(baseDir string, baseAssetsUrl string) {
 
 	tlsDir := path.Join(baseDir, "tls")
 
@@ -24,6 +24,7 @@ func ExportTLSPages(baseDir string) {
 	for _, al := range db.AdminLocales {
 
 		data := map[string]any{
+			"baseAssetsUrl": baseAssetsUrl,
 			"tlsTitle": db.GetTranslation("Title_ChooseTest", al),
 			"testrows": db.GetTestLanguagePrompts(al),
 			"skipbacktooltip": db.GetTranslation("Caption_BacktoALS", al),

@@ -1,9 +1,9 @@
 <div id="media">
 <audio id="audio" preload="auto">
-    <source src="/media/audio/{{.filename}}.mp3" type="audio/mpeg">
-    <source src="/media/audio/{{.filename}}.ogg" type="audio/ogg">
+    <source src="{{.baseAssetsUrl}}/media/audio/{{.filename}}.mp3" type="audio/mpeg">
+    <source src="{{.baseAssetsUrl}}/media/audio/{{.filename}}.ogg" type="audio/ogg">
     <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
-<button id="playaudio" disabled><img src="/images/SpkNotPressed.gif" /></button>
+<button id="playaudio" disabled><img src="{{.baseAssetsUrl}}/images/SpkNotPressed.gif" /></button>
 <script src="/js/audiomedia.js"></script>
 </div> <!-- /media -->

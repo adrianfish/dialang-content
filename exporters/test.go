@@ -12,7 +12,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportTestIntroPages(baseDir string) {
+func ExportTestIntroPages(baseDir string, baseAssetsUrl string) {
 
 	testIntroDir := path.Join(baseDir, "testintro")
 	if err := os.MkdirAll(testIntroDir, 0777); err != nil {
@@ -37,6 +37,7 @@ func ExportTestIntroPages(baseDir string) {
 		}
 
 		data := map[string]any{
+			"baseAssetsUrl": baseAssetsUrl,
 			"al": al,
 			"title": db.GetTranslation("Title_DIALANGLangTest", al),
 			"text": template.HTML(db.GetTranslation("LangTestIntro_Text", al)),
@@ -58,7 +59,7 @@ func ExportTestIntroPages(baseDir string) {
     }
 }
 
-func ExportBasketPages(baseDir string) {
+func ExportBasketPages(baseDir string, baseAssetsUrl string) {
 
 	tpl := template.Must(template.ParseFiles(
 		path.Join("templates", "basket.gohtml"),
@@ -117,13 +118,13 @@ func ExportBasketPages(baseDir string) {
 				mediaMarkup = mediaMarkupBuffer.String()
 				rubricMediaType = "Text"
 			case "audio/mpeg":
-				if err := tpl.ExecuteTemplate(&mediaMarkupBuffer, "audiomedia.gohtml", map[string]string{"filename": basket.FileMedia}); err != nil {
+				if err := tpl.ExecuteTemplate(&mediaMarkupBuffer, "audiomedia.gohtml", map[string]string{"baseAssetsUrl": baseAssetsUrl, "filename": basket.FileMedia}); err != nil {
 					log.Fatal(err)
 				}
 				mediaMarkup = mediaMarkupBuffer.String()
 				rubricMediaType = "Sound"
 		  	case "image/jpeg":
-				if err := tpl.ExecuteTemplate(&mediaMarkupBuffer, "imagemedia.gohtml", map[string]string{"filename": basket.FileMedia}); err != nil {
+				if err := tpl.ExecuteTemplate(&mediaMarkupBuffer, "imagemedia.gohtml", map[string]string{"baseAssetsUrl": baseAssetsUrl, "filename": basket.FileMedia}); err != nil {
 					log.Fatal(err)
 				}
 				mediaMarkup = mediaMarkupBuffer.String()
@@ -156,7 +157,10 @@ func ExportBasketPages(baseDir string) {
 				numberOfItems = 1
 		  	case "shortanswer":
 				items := db.GetItemsForBasket(basketId)
-				data := map[string]any{"basketPrompt": template.HTML(basketPrompt), "items": items}
+				data := map[string]any{
+					"basketPrompt": template.HTML(basketPrompt),
+					"items": items,
+				}
 				if err := tpl.ExecuteTemplate(&basketMarkupBuffer, "saresponse.gohtml", data); err != nil {
 					log.Fatal(err)
 				}
@@ -176,7 +180,11 @@ func ExportBasketPages(baseDir string) {
 					gapMarkup = strings.Replace(gapMarkup, itemNumber,"<input type=\"text\" name=\"" + strconv.Itoa(item.Id) + "-response\" autocomplete=\"off\" />", 1)
 				}
 
-				data := map[string]any{"basketPrompt": basketPrompt, "items": items, "markup": template.HTML(gapMarkup)}
+				data := map[string]any{
+					"basketPrompt": basketPrompt,
+					"items": items,
+					"markup": template.HTML(gapMarkup),
+				}
 				if err := tpl.ExecuteTemplate(&basketMarkupBuffer, "gtresponse.gohtml", data); err != nil {
 					log.Fatal(err)
 				}
@@ -204,7 +212,11 @@ func ExportBasketPages(baseDir string) {
 					gapMarkup = strings.Replace(gapMarkup, itemNumber, selectMarkup, 1)
             	}
 
-				data := map[string]any{"basketPrompt": basketPrompt, "items": items, "markup": template.HTML(gapMarkup)}
+				data := map[string]any{
+					"basketPrompt": basketPrompt,
+					"items": items,
+					"markup": template.HTML(gapMarkup),
+				}
 				if err := tpl.ExecuteTemplate(&basketMarkupBuffer, "gdresponse.gohtml", data); err != nil {
 					log.Fatal(err)
 				}
@@ -225,7 +237,9 @@ func ExportBasketPages(baseDir string) {
 						"answers": db.GetAnswersForItem(item.Id),
 				  	})
 				}
-				data := map[string]any{"childBaskets": childBaskets}
+				data := map[string]any{
+					"childBaskets": childBaskets,
+				}
 				if err := tpl.ExecuteTemplate(&basketMarkupBuffer, "tabbedpaneresponse.gohtml", data); err != nil {
 					log.Fatal(err)
 				}
@@ -251,6 +265,7 @@ func ExportBasketPages(baseDir string) {
 			correctAnswersTitle := db.GetTranslation("LangTest_ItemFeedback_CorrectAnswers",al)
 
 			data := map[string]any{
+				"baseAssetsUrl": baseAssetsUrl,
 				"basketId": strconv.Itoa(basketId),
 				"basketType": basketType,
 				"rubricText": template.HTML(rubricText),

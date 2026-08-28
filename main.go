@@ -19,58 +19,60 @@ func main()  {
 	os.MkdirAll(webDataDir, 0777)
 
 	var err error
-	namesFile, err := os.Create(filepath.Join(webDataDir, "language-names.json"));
+	namesFile, err := os.Create(filepath.Join(webDataDir, "language-names.json"))
 	if err != nil {
 	}
 
 	srcNamesFile, err := os.Open("./data-files/language-names.json")
 	if _, err := io.Copy(namesFile, srcNamesFile); err != nil {
-		log.Println("Failed to copy language names");
+		log.Println("Failed to copy language names")
 	}
 
-	skillsFile, err := os.Create(filepath.Join(webDataDir, "skill-names.json"));
+	skillsFile, err := os.Create(filepath.Join(webDataDir, "skill-names.json"))
 	if err != nil {
 	}
 
 	srcSkillsFile, err := os.Open("./data-files/skill-names.json")
 	if _, err := io.Copy(skillsFile, srcSkillsFile); err != nil {
-		log.Println("Failed to copy skill names");
+		log.Println("Failed to copy skill names")
 	}
 
 	start := time.Now()
 
+	baseAssetsUrl := "https://pub-c5c4a068a24045f68b85a172153bd668.r2.dev"
+
 	var wg sync.WaitGroup
 
 	wg.Go(func() {
-		exporters.ExportBasketPages(contentDir)
+		exporters.ExportBasketPages(contentDir, baseAssetsUrl)
 	})
 
 	wg.Go(func() {
 		exporters.ExportWebData(webDataDir)
 		exporters.ExportLangMappings(contentDir)
-		exporters.ExportALS(contentDir)
-		exporters.ExportLaunch(contentDir)
-		exporters.ExportHelpDialogs(contentDir)
-		exporters.ExportLegendPages(contentDir)
-		exporters.ExportFlowchartPages(contentDir)
-		exporters.ExportTLSPages(contentDir)
-		exporters.ExportDeepLinkingMenuPages(contentDir)
-		exporters.ExportVSPTIntroPages(contentDir)
+		exporters.ExportALS(contentDir, baseAssetsUrl)
+		exporters.ExportLaunch(contentDir, baseAssetsUrl)
+		exporters.ExportHelpDialogs(contentDir, baseAssetsUrl)
+		exporters.ExportLegendPages(contentDir, baseAssetsUrl)
+		exporters.ExportFlowchartPages(contentDir, baseAssetsUrl)
+		exporters.ExportTLSPages(contentDir, baseAssetsUrl)
+		exporters.ExportDeepLinkingMenuPages(contentDir, baseAssetsUrl)
+		exporters.ExportVSPTIntroPages(contentDir, baseAssetsUrl)
 	})
 
 	wg.Go(func() {
-		exporters.ExportVSPTPages(contentDir)
+		exporters.ExportVSPTPages(contentDir, baseAssetsUrl)
 		exporters.ExportVSPTFeedbackPages(contentDir)
-		exporters.ExportSAIntroPages(contentDir)
-		exporters.ExportSAPages(contentDir)
+		exporters.ExportSAIntroPages(contentDir, baseAssetsUrl)
+		exporters.ExportSAPages(contentDir, baseAssetsUrl)
 		exporters.ExportSAFeedbackPages(contentDir)
-		exporters.ExportTestIntroPages(contentDir)
+		exporters.ExportTestIntroPages(contentDir, baseAssetsUrl)
 		exporters.ExportEndOfTestPages(contentDir)
-		exporters.ExportFeedbackMenuPages(contentDir)
-		exporters.ExportItemReviewPages(contentDir)
-		exporters.ExportExplfbPages(contentDir)
+		exporters.ExportFeedbackMenuPages(contentDir, baseAssetsUrl)
+		exporters.ExportItemReviewPages(contentDir, baseAssetsUrl)
+		exporters.ExportExplfbPages(contentDir, baseAssetsUrl)
 		exporters.ExportAdvfbPages(contentDir)
-		exporters.ExportTestResultPages(contentDir)
+		exporters.ExportTestResultPages(contentDir, baseAssetsUrl)
 	})
 
 	exporters.ExportQuestionnairePages(contentDir)

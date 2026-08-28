@@ -9,7 +9,7 @@ import (
 	"github.com/adrianfish/dialang/content/models"
 )
 
-func ExportVSPTIntroPages(baseDir string) {
+func ExportVSPTIntroPages(baseDir string, baseAssetsUrl string) {
 
 	vsptintroDir := path.Join(baseDir, "vsptintro")
 	if err := os.MkdirAll(vsptintroDir, 0777); err != nil {
@@ -21,6 +21,7 @@ func ExportVSPTIntroPages(baseDir string) {
 	for _, al := range db.AdminLocales {
 
 		data := map[string]any{
+			"baseAssetsUrl": baseAssetsUrl,
 			"title": db.GetTranslation("Title_Placement", al),
 			"text": template.HTML(db.GetTranslation("PlacementIntro_Text", al)),
 			"warningText": template.HTML(db.GetTranslation("Dialogues_SkipPlacement", al)),
@@ -45,7 +46,7 @@ func ExportVSPTIntroPages(baseDir string) {
     }
 }
 
-func ExportVSPTPages(baseDir string) {
+func ExportVSPTPages(baseDir string, baseAssetsUrl string) {
 
 	vsptBaseDir := path.Join(baseDir, "vspt")
 	if err := os.MkdirAll(vsptBaseDir, 0777); err != nil {
@@ -146,6 +147,7 @@ func ExportVSPTPages(baseDir string) {
 				})
 
 				data := map[string]any{
+					"baseAssetsUrl": baseAssetsUrl,
 					"al": al,
 					"title": title,
 					"tl": tl,

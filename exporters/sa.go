@@ -9,7 +9,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportSAIntroPages(baseDir string) {
+func ExportSAIntroPages(baseDir string, baseAssetsUrl string) {
 
 	saintroDir := path.Join(baseDir, "saintro")
 	if err := os.MkdirAll(saintroDir, 0777); err != nil {
@@ -44,6 +44,7 @@ func ExportSAIntroPages(baseDir string) {
 		for _, skill := range db.SaSkills {
 
 			data := map[string]any {
+				"baseAssetsUrl": baseAssetsUrl,
 				"skill": strings.ToLower(skill),
 				"title": db.GetTranslation("Title_SelfAssess#" + skill, al),
 				"text": text,
@@ -63,7 +64,7 @@ func ExportSAIntroPages(baseDir string) {
 	}
 }
 
-func ExportSAPages(baseDir string) {
+func ExportSAPages(baseDir string, baseAssetsUrl string) {
 
 	saDir := path.Join(baseDir, "sa")
 
@@ -101,6 +102,7 @@ func ExportSAPages(baseDir string) {
 
 			title := db.GetTranslation("Title_SelfAssess#" + skill, al)
 			data := map[string]any{
+				"baseAssetsUrl": baseAssetsUrl,
 				"al": al,
 				"title": title,
 				"warningText": warningText,
