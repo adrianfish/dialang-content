@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "seed": "deno run -A --unstable-kv --env-file seed/seed.ts",
+  },
+  "imports": {
+    "@std/csv": "jsr:@std/csv@^1.0.6"
+  }
+}

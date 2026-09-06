@@ -1,1 +1,5 @@
 assets
+data-files
+.env
+!data-files/language-names.json
+!data-files/skill-names.json

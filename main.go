@@ -1,8 +1,6 @@
 package main
 
 import (
-	"path/filepath"
-	"io"
 	"os"
 	"log"
 	"sync"
@@ -15,27 +13,8 @@ func main()  {
 	contentDir := "../dialang-web/static/content"
 	os.MkdirAll(contentDir, 0777)
 
-	webDataDir := "../dialang-web/data-files"
+	webDataDir := "./data-files"
 	os.MkdirAll(webDataDir, 0777)
-
-	var err error
-	namesFile, err := os.Create(filepath.Join(webDataDir, "language-names.json"))
-	if err != nil {
-	}
-
-	srcNamesFile, err := os.Open("./data-files/language-names.json")
-	if _, err := io.Copy(namesFile, srcNamesFile); err != nil {
-		log.Println("Failed to copy language names")
-	}
-
-	skillsFile, err := os.Create(filepath.Join(webDataDir, "skill-names.json"))
-	if err != nil {
-	}
-
-	srcSkillsFile, err := os.Open("./data-files/skill-names.json")
-	if _, err := io.Copy(skillsFile, srcSkillsFile); err != nil {
-		log.Println("Failed to copy skill names")
-	}
 
 	start := time.Now()
 
