@@ -21,7 +21,6 @@
     <string name="AdvisoryTips_Bullet_#Reading_#A2_#Item1_#ES">Increase the range and type of texts you actively try to read. You might like to look at newspapers and magazines in Spanish and work at one or two of the more difficult articles which interest you, with a dictionary if necessary.</string>
     <string name="AdvisoryTips_Bullet_#Listening_#C1_#Item1_#DE">Listen to radio programmes, watch TV and films in German on a regular basis.</string>
     <string name="ExpIntTests_Head">DIALANG and other international language tests</string>
-    <string name="Questionnaire_Email">Your email address</string>
     <string name="AdvisoryTips_Bullet_#Listening_#A1_#Item1">Attend language classes so that you can benefit from the help of a teacher to improve your listening strategies, or join a distance language learning programme that can help you systematise your listening practice.</string>
     <string name="Title_FeedbackResultsAdvice">Feedback: results and advice</string>
     <string name="ChooseTest_Language#el-GR">GREEK</string>
@@ -132,7 +131,7 @@
     <string name="AdvisoryTips_Bullet_#Writing_#A1_#Item3_#SV">Use whatever opportunities you can to read or listen to Swedish or use Swedish: at this level, any exposure to Swedish is likely to help you improve your writing ability.</string>
     <string name="AdvisoryTable_Row2_Heading_#Writing">What I can write</string>
     <string name="AdvisoryTips_Bullet_#Writing_#A1_#Item3_#FI">Use whatever opportunities you can to read or listen to Finnish or use Finnish: at this level, any exposure to Finnish is likely to help you improve your writing ability.</string>
-    <string name="Questionnaire_Information">This questionnaire is optional and completely anonymous. You can just skip it by clicking the 'fast forward' button in the toolbar. We'll use the information collected along with the question responses in our improvement processes, such as adding new administration languages. We'd appreciate it if you took a minute to complete it! We may use your email to contact you to request further details about your test, to help with our design in the future. We will never share your email with anybody other than Dialang staff.</string>
+    <string name="Questionnaire_Information">This questionnaire is optional and completely anonymous. You can just skip it by clicking the 'fast forward' button in the toolbar. We'll use the information collected along with the question responses in our improvement processes, such as adding new administration languages. We'd appreciate it if you took a minute to complete it!</string>
     <string name="Keyboard_Accept">Accept</string>
     <string name="AdvisoryTips_Bullet_#Writing_#A1_#Item5_#DE">Try to learn how new words are typically formed in German.</string>
     <string name="AdvisoryTips_Bullet_#Reading_#C1_#Item4_#EL">Access the Greek version of the instructions for new machines rather than those in your first language.</string>

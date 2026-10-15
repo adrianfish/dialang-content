@@ -1,12 +1,13 @@
 <div id="large-logo-wrapper">
   <img src="{{.BaseAssetsUrl}}/images/dlogo_large_dark.gif"/>
 </div>
-<form id="als-form" method="POST" action="/api/setal">
+<form id="als-form">
   <select id="al-dropdown" name="al">
     {{range .Languages}}
     <option value="{{.Locale}}">{{.Description}}</option>
     {{end}}
   </select>
+  <button type="button" id="al-button">Select Language</button>
 </form>
 <br />
 <br />

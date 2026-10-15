@@ -32,6 +32,7 @@ func main()  {
 		exporters.ExportALS(contentDir, baseAssetsUrl)
 		exporters.ExportLaunch(contentDir, baseAssetsUrl)
 		exporters.ExportHelpDialogs(contentDir, baseAssetsUrl)
+		exporters.ExportSaveDialogs(contentDir, baseAssetsUrl)
 		exporters.ExportLegendPages(contentDir, baseAssetsUrl)
 		exporters.ExportFlowchartPages(contentDir, baseAssetsUrl)
 		exporters.ExportTLSPages(contentDir, baseAssetsUrl)

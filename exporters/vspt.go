@@ -82,7 +82,7 @@ func ExportVSPTPages(baseDir string, baseAssetsUrl string) {
 			log.Fatal(err)
 		}
 
-		warningText := db.GetTranslation("Dialogues_SkipPlacement", al)
+		warningText:= template.HTML(db.GetTranslation("Dialogues_SkipPlacement", al))
 
 		for tl, wordList := range testLanguagesAndVSPT {
 

@@ -116,7 +116,6 @@ func ExportQuestionnairePages(baseDir string) {
 			"accuracygood": db.GetTranslation("Questionnaire_Accuracy_Good", al),
 			"accuracyexcellent": db.GetTranslation("Questionnaire_Accuracy_Excellent", al),
 			"comments": db.GetTranslation("Questionnaire_Comments", al),
-			"email": db.GetTranslation("Questionnaire_Email", al),
 		}
 
 		if f, err := os.Create(path.Join(questionnaireDir, al + ".html")); err == nil {
@@ -133,7 +132,7 @@ func ExportQuestionnairePages(baseDir string) {
 			"nexttooltip": db.GetTranslation("Caption_SubmitQuestionnaire", al),
 		}
 
-		if f, err := os.Create(path.Join(questionnaireDir, al + "toolbarTooltips.json")); err == nil {
+		if f, err := os.Create(path.Join(questionnaireDir, al + "-toolbarTooltips.json")); err == nil {
 			if err := tpl.ExecuteTemplate(f, "toolbartooltips.gojson", tipData); err != nil {
 				log.Fatal(err)
 			}

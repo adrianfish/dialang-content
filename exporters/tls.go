@@ -25,6 +25,7 @@ func ExportTLSPages(baseDir string, baseAssetsUrl string) {
 
 		data := map[string]any{
 			"baseAssetsUrl": baseAssetsUrl,
+			"saveDialogTitle": db.GetTranslation("Title_Saved", al),
 			"tlsTitle": db.GetTranslation("Title_ChooseTest", al),
 			"testrows": db.GetTestLanguagePrompts(al),
 			"skipbacktooltip": db.GetTranslation("Caption_BacktoALS", al),

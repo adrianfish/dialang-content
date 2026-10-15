@@ -1,4 +1,18 @@
+				<script>
+					var saveDialogTitle = "{{.saveDialogTitle}}";
+				</script>
                 <h1 id="tls-title">{{.tlsTitle}}</h1>
+
+                <div id="resume-test-block">
+                  <div id="resume-test-instruction">
+                    If you have a save token from a partially completed test, you can enter it here
+                    and resume your test. Otherwise, just select a test language and skill from
+                    the grid below
+                  </div>
+                  <input type="text" id="save-token-field" placeholder="Enter your save token"/>
+                  <button type="button" id="resume-test-button">Resume Test</button>
+                </div>
+
                 <table id="tls-table" cols="6">
                     <thead>
                         <tr>
