@@ -1,0 +1,11 @@
+{
+  "name": "local-kv-seed",
+  "compatibility_date": "2026-01-01",
+  "kv_namespaces": [
+    {
+      "binding": "DIALANG_KV",
+      "id": "local-namespace-id"
+    }
+  ]
+}
+

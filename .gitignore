@@ -1,5 +1,6 @@
 assets
 data-files
 .env
+.wrangler
 !data-files/language-names.json
 !data-files/skill-names.json

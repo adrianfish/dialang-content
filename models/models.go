@@ -15,21 +15,21 @@ type TestLanguage struct {
 }
 
 type VSPTBand struct {
-	Locale string
-	Level string
-	Low int
-	High int
+	Locale string `json:"locale"`
+	Level string `json:"level"`
+	Low int `json:"low"`
+	High int `json:"high"`
 }
 
 type PreestWeight struct {
-	Sa float64
-	Vspt float64
-	Coe float64
+	Sa float64 `json:"sa"`
+	Vspt float64 `json:"vspt"`
+	Coe float64 `json:"coe"`
 }
 
 type PreestAssignment struct {
-	Pe float64
-	BookletId int
+	Pe float64 `json:"pe"`
+	BookletId int `json:"bookletId"`
 }
 
 
@@ -82,23 +82,23 @@ type ItemGrade struct {
 }
 
 type SAStatement struct {
-	Locale string
-	Skill string
+	Locale string `json:"locale"`
+	Skill string `json:"skill"`
 	WordId string
 	Statement string
 }
 
 type VSPTWord struct {
-	WordId string
-	Word string
-	Valid int
-	Weight int
+	WordId string `json:"word_id"`
+	Word string `json:"word"`
+	Valid int `json:"valid"`
+	Weight int `json:"weight"`
 }
 
 type SAGrade struct {
-	Skill string
-	Rsc int
-	Ppe float64
-	Se float64
-	Grade int
+	Skill string `json:"skill"`
+	Rsc int `json:"rsc"`
+	Ppe float64 `json:"ppe"`
+	Se float64 `json:"se"`
+	Grade int `json:"grade"`
 }

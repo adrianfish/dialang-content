@@ -18,16 +18,17 @@ func main()  {
 
 	start := time.Now()
 
-	baseAssetsUrl := "https://pub-c5c4a068a24045f68b85a172153bd668.r2.dev"
+	//baseAssetsUrl := "https://pub-c5c4a068a24045f68b85a172153bd668.r2.dev"
 
 	var wg sync.WaitGroup
 
 	wg.Go(func() {
-		exporters.ExportBasketPages(contentDir, baseAssetsUrl)
+		//exporters.ExportBasketPages(contentDir, baseAssetsUrl)
 	})
 
 	wg.Go(func() {
 		exporters.ExportWebData(webDataDir)
+		/*
 		exporters.ExportLangMappings(contentDir)
 		exporters.ExportALS(contentDir, baseAssetsUrl)
 		exporters.ExportLaunch(contentDir, baseAssetsUrl)
@@ -38,8 +39,10 @@ func main()  {
 		exporters.ExportTLSPages(contentDir, baseAssetsUrl)
 		exporters.ExportDeepLinkingMenuPages(contentDir, baseAssetsUrl)
 		exporters.ExportVSPTIntroPages(contentDir, baseAssetsUrl)
+		*/
 	})
 
+	/*
 	wg.Go(func() {
 		exporters.ExportVSPTPages(contentDir, baseAssetsUrl)
 		exporters.ExportVSPTFeedbackPages(contentDir)
@@ -56,6 +59,7 @@ func main()  {
 	})
 
 	exporters.ExportQuestionnairePages(contentDir)
+	*/
 
 	wg.Wait()
 

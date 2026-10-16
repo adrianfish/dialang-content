@@ -1,156 +1,96 @@
 package exporters
 
 import (
-	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"path"
 	"strconv"
-	"strings"
 	"github.com/adrianfish/dialang/content/db"
 	"github.com/adrianfish/dialang/content/models"
 )
 
 func exportVSPTData(baseDir string) error {
 
-	wordsFile, err := os.OpenFile(baseDir + "/vspt-words.csv", os.O_RDWR | os.O_CREATE, 0666)
-	if err != nil {
-		return err
-	}
-
-	wordsWriter := csv.NewWriter(wordsFile)
-	if err := wordsWriter.Write([]string{"test_language", "word_id", "word", "valid", "weight"}); err != nil {
-		return err
-	}
-
+	tlWords := []map[string]any{}
 	for _, tl := range db.GetTestLanguageCodes() {
-		for _, word := range db.GetVSPTWords(tl.Locale) {
-			if err := wordsWriter.Write([]string{tl.Locale, word.WordId, word.Word, strconv.Itoa(word.Valid), strconv.Itoa(word.Weight)}); err != nil {
-				return err
-			}
-		}
+		tlWords = append(tlWords, map[string]any{"key": "data:vspt-words:" + tl.Locale, "value": convertToString(db.GetVSPTWords(tl.Locale))})
 	}
+	createEncoder(baseDir, "vspt-words.json").Encode(tlWords)
 
-	wordsWriter.Flush()
-
-	bandsFile, err := os.OpenFile(baseDir + "/vspt-bands.csv", os.O_RDWR | os.O_CREATE, 0666)
-
-	bandsWriter := csv.NewWriter(bandsFile)
-
-	if err := bandsWriter.Write([]string{"test_language", "level", "low", "high"}); err != nil {
-		return err
-	}
-
+	tlBands := map[string][]models.VSPTBand{}
 	for _, band := range db.GetVSPTBands() {
-		if err := bandsWriter.Write([]string{band.Locale, band.Level, strconv.Itoa(band.Low), strconv.Itoa(band.High)}); err != nil {
-			return err
+		key := "data:vspt-bands:" + band.Locale
+		if val, ok := tlBands[key]; ok {
+			tlBands[key] = append(val, band)
+		} else {
+			tlBands[key] = []models.VSPTBand{band}
 		}
 	}
 
-	bandsWriter.Flush()
+	tlBandsSlice := []map[string]any{}
+	for key, value := range tlBands {
+		tlBandsSlice = append(tlBandsSlice, map[string]any{"key": key, "value": convertToString(value)})
+	}
+	createEncoder(baseDir, "vspt-bands.json").Encode(tlBandsSlice)
 
 	return nil
 }
 
 func exportSAData(baseDir string) error {
 
-	weightsFile, err := os.Create(path.Join(baseDir, "sa-weights.csv"))
-	if err != nil {
-		return err
-	}
-
-	weightsWriter := csv.NewWriter(weightsFile)
-	if err := weightsWriter.Write([]string{"skill", "wid", "weight"}); err != nil {
-		return err
-	}
-
+	saWeights := map[string]map[string]int{}
 	for _, weight := range db.GetSAWeights() {
-		weightsWriter.Write([]string{weight.Skill, weight.WordId, strconv.Itoa(weight.Weight)})
+		key := "data:sa-weights:" + weight.Skill
+		if _, ok := saWeights[key]; ok {
+			saWeights[key][weight.WordId] = weight.Weight
+		} else {
+			saWeights[key] = map[string]int{weight.WordId: weight.Weight}
+		}
 	}
 
-	weightsWriter.Flush()
-
-	gradesFile, err := os.Create(path.Join(baseDir, "sa-grading.csv"))
-	if err != nil {
-		return err
+	saWeightsSlice := []map[string]any{}
+	for key, value := range saWeights {
+		saWeightsSlice = append(saWeightsSlice, map[string]any{"key": key, "value": convertToString(value)})
 	}
+	createEncoder(baseDir, "sa-weights.json").Encode(saWeightsSlice)
 
-	gradesWriter := csv.NewWriter(gradesFile)
-	if err := gradesWriter.Write([]string{"skill", "rsc", "ppe", "se", "grade"}); err != nil {
-		return err
-	}
-
+	saGrades := []map[string]any{}
 	for _, grade := range db.GetSAGrades() {
-		gradesWriter.Write([]string{grade.Skill, strconv.Itoa(grade.Rsc), strconv.FormatFloat(grade.Ppe, 'g', -1, 64), strconv.FormatFloat(grade.Se, 'g', -1, 64), strconv.Itoa(grade.Grade)})
+		key := "data:sa-grades:" + grade.Skill + ":" + strconv.Itoa(grade.Rsc)
+		saGrades = append(saGrades, map[string]any{"key": key, "value": convertToString(grade)})
 	}
-
-	gradesWriter.Flush()
+	createEncoder(baseDir, "sa-grading.json").Encode(saGrades)
 
 	return nil
 }
 
 func exportPreestData(baseDir string) error {
 
-	weightsFile, err := os.Create(path.Join(baseDir, "preest-weights.csv"))
-	if err != nil {
-		return err
-	}
-
-	weightsWriter := csv.NewWriter(weightsFile)
-	if err := weightsWriter.Write([]string{"key", "sa", "vspt", "coe"}); err != nil {
-		return err
-	}
-
+	preestWeights := []map[string]any{}
 	for key, weight := range db.GetPreestWeights() {
-		weightsWriter.Write([]string{
-			key,
-			strconv.FormatFloat(weight.Sa, 'g', -1, 64),
-			strconv.FormatFloat(weight.Vspt, 'g', -1, 64),
-			strconv.FormatFloat(weight.Coe, 'g', -1, 64),
-		})
+		preestWeights = append(preestWeights, map[string]any{"key": "data:preest-weights:" + key, "value": convertToString(weight)})
 	}
+	createEncoder(baseDir, "preest-weights.json").Encode(preestWeights)
 
-	weightsWriter.Flush()
 
-	assignmentsFile, err := os.Create(path.Join(baseDir, "preest-assignments.csv"))
-	if err != nil {
-		return err
-	}
-
-	assignmentsWriter := csv.NewWriter(assignmentsFile)
-	if err := assignmentsWriter.Write([]string{"key", "pe", "booklet_id"}); err != nil {
-		return err
-	}
-
+	preestAssignments := []map[string]any{}
 	for key, assignments := range db.GetPreestAssignments() {
+		assignmentsSlice := []models.PreestAssignment{}
 		for _, assignment := range assignments {
-			assignmentsWriter.Write([]string{
-				key,
-				strconv.FormatFloat(assignment.Pe, 'g', -1, 64),
-				strconv.Itoa(assignment.BookletId),
-			})
+			assignmentsSlice = append(assignmentsSlice, assignment)
 		}
+		preestAssignments = append(preestAssignments, map[string]any{"key": "data:preest-assignments:" + key, "value": convertToString(assignmentsSlice)})
 	}
-
-	assignmentsWriter.Flush()
+	createEncoder(baseDir, "preest-assignments.json").Encode(preestAssignments)
 
 	return nil
 }
 
 func exportBookletData(baseDir string) error {
 
-	lengthsFile, err := os.Create(path.Join(baseDir, "booklet-lengths.csv"))
-	if err != nil {
-		return err
-	}
-
-	lengthsWriter := csv.NewWriter(lengthsFile)
-	if err := lengthsWriter.Write([]string{"booklet_id", "length"}); err != nil {
-		return err
-	}
-
+	lengths := []map[string]any{}
 	for _, bookletId := range db.GetBookletIds() {
 		var total int
 		for _, basket := range db.GetBasketsForBooklet(bookletId) {
@@ -163,28 +103,15 @@ func exportBookletData(baseDir string) error {
 				total += db.GetNumItemsForBasket(basket.Id)
 			}
 		}
-
-		lengthsWriter.Write([]string{strconv.Itoa(bookletId), strconv.Itoa(total)})
+		lengths = append(lengths, map[string]any{"key": "data:booklet-lengths:" + strconv.Itoa(bookletId), "value": strconv.Itoa(total)})
 	}
+	createEncoder(baseDir, "booklet-lengths.json").Encode(lengths)
 
-	lengthsWriter.Flush()
-
-	basketsFile, err := os.Create(path.Join(baseDir, "booklet-baskets.csv"))
-	if err != nil {
-		return err
-	}
-
-	basketsWriter := csv.NewWriter(basketsFile)
-	if err := basketsWriter.Write([]string{"booklet_id", "basket_ids"}); err != nil {
-		return err
-	}
-
+	bookletBaskets := []map[string]any{}
 	for bookletId, baskets := range db.GetBookletBaskets() {
-		basketsStrings := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(baskets)), ","), "[]")
-		basketsWriter.Write([]string{strconv.Itoa(bookletId), basketsStrings})
+		bookletBaskets = append(bookletBaskets, map[string]any{"key": "data:booklet-baskets:" + strconv.Itoa(bookletId), "value": convertToString(baskets)});
 	}
-
-	basketsWriter.Flush()
+	createEncoder(baseDir, "booklet-baskets.json").Encode(bookletBaskets)
 
 	return nil
 }
@@ -200,46 +127,33 @@ func exportItemAnswers(baseDir string) {
 		}
 	}
 
-	if f, err := os.Create(path.Join(baseDir, "item-answers.json")); err != nil {
-		log.Fatalf("Failed to create item-answers.json: %s\n", err)
-	} else {
-		defer f.Close()
-		json.NewEncoder(f).Encode(itemAnswers)
+	itemAnswersSlice := []map[string]any{}
+	for key, value := range itemAnswers {
+		itemAnswersSlice = append(itemAnswersSlice, map[string]any{"key": key, "value": convertToString(value)})
 	}
+	createEncoder(baseDir, "item-answers.json").Encode(itemAnswersSlice)
 }
 
 func exportAnswers(baseDir string) {
 
-	answers:= map[int]models.Answer{}
+	answers:= []map[string]any{}
 	for _, answer := range db.GetAnswers() {
-		answers[answer.Id] = answer
+		answers = append(answers, map[string]any{"key": "data:answers:" + strconv.Itoa(answer.Id), "value": convertToString(answer)})
 	}
-
-	if f, err := os.Create(path.Join(baseDir, "answers.json")); err != nil {
-		log.Fatalf("Failed to create answers.json: %s\n", err)
-	} else {
-		defer f.Close()
-		json.NewEncoder(f).Encode(answers)
-	}
+	createEncoder(baseDir, "answers.json").Encode(answers)
 }
 
 func exportItems(baseDir string) {
 
-	items:= map[int]models.Item{}
+	items:= []map[string]any{}
 	if dbItems, err := db.GetItems(); err == nil {
 		for _, item := range dbItems {
-			items[item.Id] = item
+			items = append(items, map[string]any{"key": "data:items:" + strconv.Itoa(item.Id), "value": convertToString(item)})
 		}
 	} else {
 		log.Fatal(err)
 	}
-
-	if f, err := os.Create(path.Join(baseDir, "items.json")); err != nil {
-		log.Fatalf("Failed to create items.json: %s\n", err)
-	} else {
-		defer f.Close()
-		json.NewEncoder(f).Encode(items)
-	}
+	createEncoder(baseDir, "items.json").Encode(items)
 }
 
 func exportItemGrades(baseDir string) {
@@ -256,24 +170,22 @@ func exportItemGrades(baseDir string) {
 	} else {
 		log.Fatal(err)
 	}
-
-	if f, err := os.Create(path.Join(baseDir, "item-grades.json")); err != nil {
-		log.Fatalf("Failed to create items.json: %s\n", err)
-	} else {
-		defer f.Close()
-		json.NewEncoder(f).Encode(gradesMap)
+	gradesSlice := []map[string]any{}
+	for gradeKey, value := range gradesMap {
+		for rawScore, grade := range value {
+			key := "data:item-grades:" + gradeKey + ":" + strconv.Itoa(rawScore)
+			gradesSlice = append(gradesSlice, map[string]any{"key": key, "value": convertToString(grade)})
+		}
 	}
+	createEncoder(baseDir, "item-grades.json").Encode(gradesSlice)
 }
 
 func exportPunctuation(baseDir string) {
 
-	chars := db.GetPunctuationCharacters()
-	if f, err := os.Create(path.Join(baseDir, "punctuation.json")); err != nil {
-		log.Fatalf("Failed to create punctuation.json: %s\n", err)
-	} else {
-		defer f.Close()
-		json.NewEncoder(f).Encode(chars)
+	punctuation := []map[string]any{
+		map[string]any{"key": "data:punctuation", "value": convertToString(db.GetPunctuationCharacters())},
 	}
+	createEncoder(baseDir, "punctuation.json").Encode(punctuation)
 }
 
 func ExportWebData(baseDir string) {
@@ -287,4 +199,24 @@ func ExportWebData(baseDir string) {
 	exportItems(baseDir)
 	exportPunctuation(baseDir)
 	exportItemGrades(baseDir)
+}
+
+func createEncoder(baseDir string, name string) *json.Encoder {
+
+	f, err := os.Create(path.Join(baseDir, name))
+	if err != nil {
+		log.Fatalf("Failed to create %s: %s\n", name, err)
+	}
+	jsonEncoder := json.NewEncoder(f)
+	jsonEncoder.SetIndent("", "  ")
+	return jsonEncoder
+}
+
+func convertToString(thing any) string {
+
+	b, err := json.Marshal(thing)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(b)
 }
