@@ -15,7 +15,8 @@ func exportVSPTData(baseDir string) error {
 
 	tlWords := []map[string]any{}
 	for _, tl := range db.GetTestLanguageCodes() {
-		tlWords = append(tlWords, map[string]any{"key": "data:vspt-words:" + tl.Locale, "value": convertToString(db.GetVSPTWords(tl.Locale))})
+		key := "data:vspt-words:" + tl.Locale
+		tlWords = append(tlWords, map[string]any{"key": key, "value": convertToString(db.GetVSPTWords(tl.Locale))})
 	}
 	createEncoder(baseDir, "vspt-words.json").Encode(tlWords)
 
@@ -128,7 +129,8 @@ func exportItemAnswers(baseDir string) {
 	}
 
 	itemAnswersSlice := []map[string]any{}
-	for key, value := range itemAnswers {
+	for id, value := range itemAnswers {
+		key := "data:item-answers:" + strconv.Itoa(id)
 		itemAnswersSlice = append(itemAnswersSlice, map[string]any{"key": key, "value": convertToString(value)})
 	}
 	createEncoder(baseDir, "item-answers.json").Encode(itemAnswersSlice)
