@@ -8,7 +8,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportFlowchartPages(baseDir string, baseAssetsUrl string) {
+func ExportFlowchartPages(baseDir string) {
 
 	flowchartDir := path.Join(baseDir, "flowchart")
 
@@ -37,7 +37,6 @@ func ExportFlowchartPages(baseDir string, baseAssetsUrl string) {
 		stage5 := db.GetTranslation("Welcome_Chart_Feedback_Text",al)
 		data := map[string]string{
 			"al": al,
-			"baseAssetsUrl": baseAssetsUrl,
 			"welcomeTitle": welcomeTitle,
 			"welcomeText": welcomeText,
 			"procedureTitle": procedureTitle,

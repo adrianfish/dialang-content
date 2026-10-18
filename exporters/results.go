@@ -10,7 +10,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportFeedbackMenuPages(baseDir string, baseAssetsUrl string) {
+func ExportFeedbackMenuPages(baseDir string) {
 
 	feedbackMenuDir := path.Join(baseDir, "feedbackmenu")
 	if err := os.MkdirAll(feedbackMenuDir, 0777); err != nil {
@@ -36,7 +36,6 @@ func ExportFeedbackMenuPages(baseDir string, baseAssetsUrl string) {
 		quit := template.HTML(db.GetTranslation("Caption_Quit",al))
 		skipforwardtooltip := template.HTML(db.GetTranslation("Caption_ChooseAnotherTest",al))
 		data := map[string]any{
-			"baseAssetsUrl": baseAssetsUrl,
 			"al": al,
 			"title": title,
 			"text": text,
@@ -73,7 +72,7 @@ func ExportFeedbackMenuPages(baseDir string, baseAssetsUrl string) {
     }
 }
 
-func ExportItemReviewPages(baseDir string, baseAssetsUrl string) {
+func ExportItemReviewPages(baseDir string) {
 
 	itemreviewDir := path.Join(baseDir, "itemreview")
 	if err := os.MkdirAll(itemreviewDir, 0777); err != nil {
@@ -88,7 +87,6 @@ func ExportItemReviewPages(baseDir string, baseAssetsUrl string) {
 		text := template.HTML(db.GetTranslation("ItemReview_Text",al))
 		backtooltip := template.HTML(db.GetTranslation("Caption_BacktoFeedback",al))
 		data := map[string]any{
-			"baseAssetsUrl": baseAssetsUrl,
 			"title": title,
 			"text": template.HTML(text),
 			"subskills": db.GetSubSkills(al),
@@ -113,7 +111,7 @@ func ExportItemReviewPages(baseDir string, baseAssetsUrl string) {
     }
 }
 
-func ExportExplfbPages(baseDir string, baseAssetsUrl string) {
+func ExportExplfbPages(baseDir string) {
 
 	aboutSADir := path.Join(baseDir, "aboutsa")
 	if err := os.MkdirAll(aboutSADir, 0777); err != nil {
@@ -153,7 +151,6 @@ func ExportExplfbPages(baseDir string, baseAssetsUrl string) {
 		}
 
 		data := map[string]any{
-			"baseAssetsUrl": baseAssetsUrl,
 			"title": template.HTML(db.GetTranslation("FeedbackOption_AboutSelfAssess", al)),
 			"mainHeader": template.HTML(db.GetTranslation("Explanatory_Main_Header", al)),
 			"subHeader": template.HTML(db.GetTranslation("Explanatory_Main_SubHeader", al)),
@@ -1003,7 +1000,7 @@ func ExportAdvfbPages(baseDir string) {
     }
 }
 
-func ExportTestResultPages(baseDir string, baseAssetsUrl string) {
+func ExportTestResultPages(baseDir string) {
 
 	testresultsDir := path.Join(baseDir, "testresults")
 	if err := os.MkdirAll(testresultsDir, 0777); err != nil {
@@ -1049,7 +1046,6 @@ func ExportTestResultPages(baseDir string, baseAssetsUrl string) {
 			for _, itemLevel := range db.ItemLevels {
 				text := db.GetTranslation("TestResults_Text#" + skill + "#" + itemLevel, al)
 				data := map[string]any{
-					"baseAssetsUrl": baseAssetsUrl,
 					"al": al,
 					"title": title,
 					"text": text,

@@ -10,49 +10,47 @@ import (
 
 func main()  {
 
-	contentDir := "../dialang-web/content"
+	contentDir := "./content"
 	os.MkdirAll(contentDir, 0777)
 
-	webDataDir := "../dialang-web/data-files"
+	webDataDir := "../dialang-web/db-seed-data-files"
 	os.MkdirAll(webDataDir, 0777)
 
 	start := time.Now()
 
-	baseAssetsUrl := "https://pub-c5c4a068a24045f68b85a172153bd668.r2.dev"
-
 	var wg sync.WaitGroup
 
 	wg.Go(func() {
-		exporters.ExportBasketPages(contentDir, baseAssetsUrl)
+		exporters.ExportBasketPages(contentDir)
 	})
 
 	wg.Go(func() {
 		exporters.ExportWebData(webDataDir)
 		exporters.ExportLangMappings(contentDir)
-		exporters.ExportALS(contentDir, baseAssetsUrl)
-		exporters.ExportLaunch(contentDir, baseAssetsUrl)
-		exporters.ExportHelpDialogs(contentDir, baseAssetsUrl)
-		exporters.ExportSaveDialogs(contentDir, baseAssetsUrl)
-		exporters.ExportLegendPages(contentDir, baseAssetsUrl)
-		exporters.ExportFlowchartPages(contentDir, baseAssetsUrl)
-		exporters.ExportTLSPages(contentDir, baseAssetsUrl)
-		exporters.ExportDeepLinkingMenuPages(contentDir, baseAssetsUrl)
-		exporters.ExportVSPTIntroPages(contentDir, baseAssetsUrl)
+		exporters.ExportALS(contentDir)
+		exporters.ExportLaunch(contentDir)
+		exporters.ExportHelpDialogs(contentDir)
+		exporters.ExportSaveDialogs(contentDir)
+		exporters.ExportLegendPages(contentDir)
+		exporters.ExportFlowchartPages(contentDir)
+		exporters.ExportTLSPages(contentDir)
+		exporters.ExportDeepLinkingMenuPages(contentDir)
+		exporters.ExportVSPTIntroPages(contentDir)
 	})
 
 	wg.Go(func() {
-		exporters.ExportVSPTPages(contentDir, baseAssetsUrl)
+		exporters.ExportVSPTPages(contentDir)
 		exporters.ExportVSPTFeedbackPages(contentDir)
-		exporters.ExportSAIntroPages(contentDir, baseAssetsUrl)
-		exporters.ExportSAPages(contentDir, baseAssetsUrl)
+		exporters.ExportSAIntroPages(contentDir)
+		exporters.ExportSAPages(contentDir)
 		exporters.ExportSAFeedbackPages(contentDir)
-		exporters.ExportTestIntroPages(contentDir, baseAssetsUrl)
+		exporters.ExportTestIntroPages(contentDir)
 		exporters.ExportEndOfTestPages(contentDir)
-		exporters.ExportFeedbackMenuPages(contentDir, baseAssetsUrl)
-		exporters.ExportItemReviewPages(contentDir, baseAssetsUrl)
-		exporters.ExportExplfbPages(contentDir, baseAssetsUrl)
+		exporters.ExportFeedbackMenuPages(contentDir)
+		exporters.ExportItemReviewPages(contentDir)
+		exporters.ExportExplfbPages(contentDir)
 		exporters.ExportAdvfbPages(contentDir)
-		exporters.ExportTestResultPages(contentDir, baseAssetsUrl)
+		exporters.ExportTestResultPages(contentDir)
 	})
 
 	exporters.ExportQuestionnairePages(contentDir)

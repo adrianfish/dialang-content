@@ -8,7 +8,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportHelpDialogs(baseDir string, baseAssetsUrl string) {
+func ExportHelpDialogs(baseDir string) {
 
 	helpDir := path.Join(baseDir, "help")
 
@@ -41,7 +41,6 @@ func ExportHelpDialogs(baseDir string, baseAssetsUrl string) {
 		saTitle := db.GetTranslation("Title_SelfAssess",al)
 		saText := template.HTML(db.GetTranslation("Help_Texts_SelfAssess",al))
 		data := map[string]any{
-			"baseAssetsUrl": baseAssetsUrl,
 			"key": key,
 			"next": next,
 			"back": back,

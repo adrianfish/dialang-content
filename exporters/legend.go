@@ -8,7 +8,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportLegendPages(baseDir string, baseAssetsUrl string) {
+func ExportLegendPages(baseDir string) {
 
 	legendDir := path.Join(baseDir, "legend")
 
@@ -37,7 +37,6 @@ func ExportLegendPages(baseDir string, baseAssetsUrl string) {
 		backtooltip := db.GetTranslation("Caption_BacktoALS",al)
 		nexttooltip := db.GetTranslation("Caption_ContinueNext",al)
 		data := map[string]string{
-			"baseAssetsUrl": baseAssetsUrl,
 			"key": key,
 			"next": next,
 			"back": back,

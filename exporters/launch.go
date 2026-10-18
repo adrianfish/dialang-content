@@ -8,7 +8,7 @@ import (
 	"path"
 )
 
-func ExportLaunch(baseDir string, baseAssetsUrl string) {
+func ExportLaunch(baseDir string) {
 
 	log.Print(baseDir)
 
@@ -16,12 +16,10 @@ func ExportLaunch(baseDir string, baseAssetsUrl string) {
 
 	if f, err := os.Create(path.Join(baseDir, "launch.html")); err == nil {
 		launchData := map[string]string {
-			"baseAssetsUrl": baseAssetsUrl,
 		}
 		var b bytes.Buffer
 		if err := tpl.ExecuteTemplate(&b, "launch.gohtml", launchData); err == nil {
 			data := map[string]any {
-				"baseAssetsUrl": baseAssetsUrl,
 				"state": "launch",
 				"content": template.HTML(b.String()),
 			}

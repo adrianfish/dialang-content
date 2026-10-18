@@ -8,7 +8,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportSaveDialogs(baseDir string, baseAssetsUrl string) {
+func ExportSaveDialogs(baseDir string) {
 
 	saveDir := path.Join(baseDir, "save")
 

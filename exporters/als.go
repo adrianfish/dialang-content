@@ -10,7 +10,7 @@ import (
 	"github.com/adrianfish/dialang/content/models"
 )
 
-func ExportALS(baseDir string, baseAssetsUrl string) {
+func ExportALS(baseDir string) {
 
 	tpl := template.Must(template.ParseFiles(path.Join("templates", "als.gohtml"), path.Join("templates", "shell.gohtml")))
 
@@ -23,12 +23,10 @@ func ExportALS(baseDir string, baseAssetsUrl string) {
 		}{
 			Languages: db.GetAdminLanguages(),
 			Fundermessage: funderMessage,
-			BaseAssetsUrl: baseAssetsUrl,
 		}
 		var b bytes.Buffer
 		if err := tpl.ExecuteTemplate(&b, "als.gohtml", data); err == nil {
 			alsData:= map[string]any{
-				"baseAssetsUrl": baseAssetsUrl,
 				"state": "als",
 				"content": template.HTML(b.String()),
 			}

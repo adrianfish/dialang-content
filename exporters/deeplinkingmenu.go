@@ -8,7 +8,7 @@ import (
 	"github.com/adrianfish/dialang/content/db"
 )
 
-func ExportDeepLinkingMenuPages(baseDir string, baseAssetsUrl string) {
+func ExportDeepLinkingMenuPages(baseDir string) {
 
 	deepLinkingMenuDir := path.Join(baseDir, "deep-linking-menu")
 
@@ -24,7 +24,6 @@ func ExportDeepLinkingMenuPages(baseDir string, baseAssetsUrl string) {
 	for _, al := range db.AdminLocales {
 
 		data := map[string]any{
-			"baseAssetsUrl": baseAssetsUrl,
 			"al": al,
 			"tlsTitle": db.GetTranslation("Title_ChooseTest", al),
 			"testrows": db.GetTestLanguagePrompts(al),
